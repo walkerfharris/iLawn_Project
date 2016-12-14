@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- responsive -->
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="css/editor-css.css">
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+</head>
+<body>
+    <div class="page-header header">
+        <h1 class="text-center" id="profile-header"></h1>
+    </div>
+    <div class="container container-custom">
+        <h2 class="text-center">Account Info</h2>
+        <hr>
+        <div class="row">
+            <div class="col-md-4 col-sm-12 text-center">
+                <img class="img-responsive img-self" src="img/unknown-profile.jpg" alt="Default Profile Pic">
+            </div>
+            <div class="col-md-6 col-sm-12 left">
+                <div id="name"></div>
+                <div id="address"></div>
+                <div id="email"></div>
+                <div id="phone"></div>
+                <div id="in-date"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Selecting a service and input payment info -->
+
+    <section id="shop-pay">
+        <div class="container container-custom">
+            <h2 class="text-center">Shop & Pay</h2>
+            <hr>
+            <div class="row text-center">
+              <div class="col-md-offset-2 col-md-2">
+                    <p>Select a Service: </p></div>
+              <div class="col-md-3">
+                  <button class="btn btn-default OneTime">One Time Payment</button>
+              </div>
+              <div class="col-md-3">
+                  <button class="btn btn-default monthly">Monthly Subscribtion</button>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-offset-5 col-md-2">
+                    <div id="totalPay">
+                        <p>Order:    $0.00</p>
+                        <p>Discount: $0.00</p>
+                        <p>Tax:      $0.00</p>
+                        <hr>
+                        <p>Total:    $0.00</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <br>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <i class="fa fa-cc-visa fa-2" aria-hidden="true"></i>
+                    <i class="fa fa-cc-mastercard fa-2" aria-hidden="true"></i>
+                    <i class="fa fa-cc-discover fa-2" aria-hidden="true"></i>
+                    <i class="fa fa-cc-amex fa-2" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src='js/editor/profile.js'></script>
+</body>
+</html>

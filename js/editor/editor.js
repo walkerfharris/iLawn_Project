@@ -9,7 +9,5 @@ $(document).ready(function() {
       };
       firebase.initializeApp(config);
 
-    $('#signUpButton').on('click', function() {
-        window.location = "/signup.html"
-    })
+      console.log(localStorage.getItem('userKey'));
 })
