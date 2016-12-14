@@ -1,0 +1,30 @@
+body {
+    background: url('../img/profile-bg.jpg');
+}
+
+.container-custom {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid #4aaaa5;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.img-self {
+    width: 40%;
+    height: auto;
+    border: 3px solid #4aaaa5;
+    margin: 20% 15%;
+}
+
+.left {
+    margin-top: 100px;
+    color: #000;
+}
+
+h1, h2, h3, p {
+    color: #000;
+}
+
+hr {
+    border-top: 1px solid #4aaaa5;
+}
