@@ -16,10 +16,8 @@ $(document).ready(function() {
       // retrieve the username and pushID or the uuid from the local storage
 
       var userName = localStorage.getItem('userKey')
-      var uuid = localStorage.getItem('newClientID')
       console.log(userName);
-      console.log(uuid)
-      database.ref('/clients/' + userName + '/' + uuid).on('value', function(snapshot) {
+      database.ref('/clients/' + userName).on('value', function(snapshot) {
           // log the client data to the console
           console.log(snapshot.val());
           console.log(snapshot.val().userid);
@@ -30,6 +28,11 @@ $(document).ready(function() {
           $('#address').html('<h4><i class="fa fa-map-marker fa-2" aria-hidden="true"></i> ' + snapshot.val().address + '</h4>')
           $('#email').html('<h5><i class="fa fa-envelope fa-2" aria-hidden="true"></i> ' + snapshot.val().email + '</h5>')
           $('#phone').html('<h5><i class="fa fa-phone-square fa-2" aria-hidden="true"></i> ' + snapshot.val().phone + '</h5>')
+      })
+
+      $('#signOutBtn').on('click', function() {
+          window.location.href = 'index.html';
+          return false;
       })
 
 });
