@@ -44,14 +44,13 @@ $(document).ready(function() {
 
             // Push client info to the database
             // the uid will be treated as the key for the client entry in the DB
-            var newClient = database.ref('/clients/' + uid).push({
+            var newClient = database.ref('/clients/' + uid).set({
                 userid: uid,
                 email: email,
                 address: address,
                 phone: phone,
+                pass: pass,
             })
-            var clientID = newClient.key;
-            localStorage.setItem('newClientID', clientID);
             window.location.href = 'profile.html';
             return false;
           } // function excuted on else, ends here
@@ -59,5 +58,4 @@ $(document).ready(function() {
 
 
       console.log(localStorage.getItem('userKey'));
-      console.log(localStorage.getItem('newClientID'));
 })

@@ -16,10 +16,8 @@ $(document).ready(function() {
       // retrieve the username and pushID or the uuid from the local storage
 
       var userName = localStorage.getItem('userKey')
-      var uuid = localStorage.getItem('newClientID')
       console.log(userName);
-      console.log(uuid)
-      database.ref('/clients/' + userName + '/' + uuid).on('value', function(snapshot) {
+      database.ref('/clients/' + userName).on('value', function(snapshot) {
           // log the client data to the console
           console.log(snapshot.val());
           console.log(snapshot.val().userid);
