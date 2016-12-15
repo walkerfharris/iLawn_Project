@@ -30,4 +30,9 @@ $(document).ready(function() {
           $('#phone').html('<h5><i class="fa fa-phone-square fa-2" aria-hidden="true"></i> ' + snapshot.val().phone + '</h5>')
       })
 
+      $('#signOutBtn').on('click', function() {
+          window.location.href = 'index.html';
+          return false;
+      })
+
 });

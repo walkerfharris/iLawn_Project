@@ -20,17 +20,33 @@ $(document).ready(function() {
       $('#signInBtn').on('click', function() {
 
             var uid = uidText.val().trim();
-            var pass = passText.val().trim();
+            var userPass = passText.val().trim();
+            var dbPass;
 
             localStorage.clear();
             localStorage.setItem('userKey', uid);
             console.log(localStorage.getItem('userKey'));
 
-            database.ref('/clients/' + uid).on('value', function(snapshot) {
-              console.log(snapshot.val());
+            database.ref('/clients/' + uid).on('value', function(snap) {
+              console.log(snap.val());
+              dbPass = snap.val().pass;
             });
-            window.location.href = 'profile.html';
-            return false;
+
+            database.ref('/clients').on('value', function(snapshot) {
+              console.log(snapshot.val());
+              console.log(dbPass);
+              console.log(userPass);
+              if (!snapshot.child(uid).exists()) {
+                $('#error-message').html('<p>*This user is not exist in our records</p>')
+              } else if (userPass != dbPass) {
+                $('#error-message').html('<p>*User name or password is incorrect</p>')
+                return false;
+              }
+              else {
+                window.location.href = 'profile.html';
+                return false;
+              }
+            });
       });
 
 });
