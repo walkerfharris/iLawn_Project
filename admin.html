@@ -19,9 +19,9 @@
         <h1 class="text-center" id="profile-header">Welcome to the Admin Board</h1>
     </div>
     <div class="container">
+        <!-- Clients table-->
         <div class="row">
             <div class="col-lg-12">
-            <!-- Clients table-->
               <div class="panel panel-primary">
                 <div class="panel-heading">
                   <h3 class="panel-title"><strong>Clients Database</strong></h3>
@@ -41,11 +41,36 @@
                   </table>
                 </div>
               </div>
-              <div class="row">
-                  <div class="col-md-offset-2 col-md-8">
-                      <div id="map"></div>
-                  </div>
+            </div>
+        </div>
+        <!-- Contractors table-->
+        <div class="row">
+            <div class="col-lg-12">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><strong>Contractors Database</strong></h3>
+                </div>
+                <div class="panel-body">
+                  <table class="table table-hover" id='contractor-table'>
+                    <thead>
+                      <tr>
+                        <th>User Name</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
               </div>
+            </div>
+        </div>
+        <!-- Map position -->
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <div id="map"></div>
             </div>
         </div>
     </div>
@@ -67,27 +92,50 @@
           var phone = childSnapshot.val().phone;
           var email = childSnapshot.val().email;
           var address = childSnapshot.val().address;
+          var role = childSnapshot.val().role;
           console.log(address);
           console.log(userName);
           console.log(phone);
           console.log(email);
-          var clientLabel = "A";
-          geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == 'OK') {
-              map.setCenter(results[0].geometry.location);
-              var marker = new google.maps.Marker({
-                  map: map,
-                  label: clientLabel,
-                  position: results[0].geometry.location,
-              });
-            } else {
-              alert('Geocode was not successful for the following reason: ' + status);
-            }
-          });
+          console.log(role);
 
-          // append clients to the table once signed up
-          $("#clients-table > tbody").append("<tr><td>" + userName + "</td><td>" + address + "</td><td>" +
-          email + "</td><td>" + phone + "</td></tr>");
+          if (role == 'client') {
+              var clientLabel = "A";
+              geocoder.geocode( { 'address': address}, function(results, status) {
+                if (status == 'OK') {
+                  map.setCenter(results[0].geometry.location);
+                  var marker = new google.maps.Marker({
+                      map: map,
+                      label: clientLabel,
+                      position: results[0].geometry.location,
+                  });
+                } else {
+                  alert('Geocode was not successful for the following reason: ' + status);
+                }
+              });
+
+              // append clients to the table once signed up
+              $("#clients-table > tbody").append("<tr><td>" + userName + "</td><td>" + address + "</td><td>" +
+              email + "</td><td>" + phone + "</td></tr>");
+          }
+          if (role == 'contractor') {
+              var contLabel = "B";
+              geocoder.geocode( { 'address': address}, function(results, status) {
+                if (status == 'OK') {
+                  map.setCenter(results[0].geometry.location);
+                  var marker = new google.maps.Marker({
+                      map: map,
+                      label: contLabel,
+                      position: results[0].geometry.location,
+                  });
+                } else {
+                  alert('Geocode was not successful for the following reason: ' + status);
+                }
+              });
+
+              // append clients to the table once signed up
+              $("#contractor-table > tbody").append("<tr><td>" + userName + "</td><td>" + address + "</td><td>" + email + "</td><td>" + phone + "</td></tr>");
+          }
         });
 
         var geocoder;
@@ -101,20 +149,8 @@
           }
           map = new google.maps.Map(document.getElementById('map'), mapOptions);
         }
-        // function codeAddress() {
-        //   var address = document.getElementById('address').value;
-          // geocoder.geocode( { 'address': address}, function(results, status) {
-          //   if (status == 'OK') {
-          //     map.setCenter(results[0].geometry.location);
-          //     var marker = new google.maps.Marker({
-          //         map: map,
-          //         position: results[0].geometry.location
-          //     });
-          //   } else {
-          //     alert('Geocode was not successful for the following reason: ' + status);
-          //   }
-          // });
-        // }
+
+        // info popup to appear when a marker clicked with the client/contractor info
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5MYkrq5YRnEDfQZAPhxuLTS3I9bu1cXs&callback=initMap">
