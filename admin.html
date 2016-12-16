@@ -8,21 +8,10 @@
     <link rel="stylesheet" type="text/css" href="css/editor-css.css">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-    <script src="api/gmaps.min.js"></script>
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
       #map {
         height: 400px;
         width: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      /*html, body {
-        width: 100%;
-        height: 400px;
-        margin: 0;
-        padding: 0;
-      }*/
     </style>
 </head>
 <body onload="initialize()">
@@ -38,32 +27,88 @@
         </div>
     </div>
     <script>
-        var geocoder;
-      var map;
-      function initialize() {
-        geocoder = new google.maps.Geocoder();
-        var latlng = new google.maps.LatLng(29.7630556,  -95.3630556);
-        var mapOptions = {
-          zoom: 10,
-          center: latlng
-        }
-        map = new google.maps.Map(document.getElementById('map'), mapOptions);
-      }
+        var config = {
+            apiKey: "AIzaSyCLWRw68W89mSHVL6akIaPNK2qxcqRaWPQ",
+            authDomain: "ilawnproject.firebaseapp.com",
+            databaseURL: "https://ilawnproject.firebaseio.com",
+            storageBucket: "ilawnproject.appspot.com",
+            messagingSenderId: "751810048512"
+        };
+        firebase.initializeApp(config);
+        var database = firebase.database().ref('/clients')
 
-      function codeAddress() {
-        var address = document.getElementById('address').value;
-        geocoder.geocode( { 'address': address}, function(results, status) {
-          if (status == 'OK') {
-            map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
+        database.on("child_added", function(childSnapshot, prevChildKey) {
+
+          console.log(childSnapshot.val());
+          var address = childSnapshot.val().address;
+          console.log(address);
+
+          geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == 'OK') {
+              map.setCenter(results[0].geometry.location);
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location
+              });
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+          });
+
+          // Store everything into a variable.
+          // var empName = childSnapshot.val().name;
+          // var empRole = childSnapshot.val().role;
+          // var empStart = childSnapshot.val().start;
+          // var empRate = childSnapshot.val().rate;
+
+          // // Employee Info
+          // console.log(empName);
+          // console.log(empRole);
+          // console.log(empStart);
+          // console.log(empRate);
+
+          // // Prettify the employee start
+          // var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
+
+          // // Calculate the months worked using hardcore math
+          // // To calculate the months worked
+          // var empMonths = moment().diff(moment.unix(empStart, "X"), "months");
+          // console.log(empMonths);
+
+          // // Calculate the total billed rate
+          // var empBilled = empMonths * empRate;
+          // console.log(empBilled);
+
+          // // Add each train's data into the table
+          // $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
+          // empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
         });
-      }
+
+        var geocoder;
+        var map;
+        function initialize() {
+          geocoder = new google.maps.Geocoder();
+          var latlng = new google.maps.LatLng(29.7630556,  -95.3630556);
+          var mapOptions = {
+            zoom: 10,
+            center: latlng
+          }
+          map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        }
+        // function codeAddress() {
+        //   var address = document.getElementById('address').value;
+          // geocoder.geocode( { 'address': address}, function(results, status) {
+          //   if (status == 'OK') {
+          //     map.setCenter(results[0].geometry.location);
+          //     var marker = new google.maps.Marker({
+          //         map: map,
+          //         position: results[0].geometry.location
+          //     });
+          //   } else {
+          //     alert('Geocode was not successful for the following reason: ' + status);
+          //   }
+          // });
+        // }
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5MYkrq5YRnEDfQZAPhxuLTS3I9bu1cXs&callback=initMap">
