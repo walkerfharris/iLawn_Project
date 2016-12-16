@@ -15,14 +15,37 @@
     </style>
 </head>
 <body onload="initialize()">
+    <div class="page-header header">
+        <h1 class="text-center" id="profile-header">Welcome to the Admin Board</h1>
+    </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-offset-2 col-md-8">
-                <div id="map"></div>
-       <div>
-         <input id="address" type="textbox" value="Sydney, NSW">
-         <input type="button" value="Encode" onclick="codeAddress()">
-       </div>
+            <div class="col-lg-12">
+            <!-- Clients table-->
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><strong>Clients Database</strong></h3>
+                </div>
+                <div class="panel-body">
+                  <table class="table table-hover" id='clients-table'>
+                    <thead>
+                      <tr>
+                        <th>User Name</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-offset-2 col-md-8">
+                      <div id="map"></div>
+                  </div>
+              </div>
             </div>
         </div>
     </div>
@@ -40,48 +63,31 @@
         database.on("child_added", function(childSnapshot, prevChildKey) {
 
           console.log(childSnapshot.val());
+          var userName = childSnapshot.val().userid;
+          var phone = childSnapshot.val().phone;
+          var email = childSnapshot.val().email;
           var address = childSnapshot.val().address;
           console.log(address);
-
+          console.log(userName);
+          console.log(phone);
+          console.log(email);
+          var clientLabel = "A";
           geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == 'OK') {
               map.setCenter(results[0].geometry.location);
               var marker = new google.maps.Marker({
                   map: map,
-                  position: results[0].geometry.location
+                  label: clientLabel,
+                  position: results[0].geometry.location,
               });
             } else {
               alert('Geocode was not successful for the following reason: ' + status);
             }
           });
 
-          // Store everything into a variable.
-          // var empName = childSnapshot.val().name;
-          // var empRole = childSnapshot.val().role;
-          // var empStart = childSnapshot.val().start;
-          // var empRate = childSnapshot.val().rate;
-
-          // // Employee Info
-          // console.log(empName);
-          // console.log(empRole);
-          // console.log(empStart);
-          // console.log(empRate);
-
-          // // Prettify the employee start
-          // var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
-
-          // // Calculate the months worked using hardcore math
-          // // To calculate the months worked
-          // var empMonths = moment().diff(moment.unix(empStart, "X"), "months");
-          // console.log(empMonths);
-
-          // // Calculate the total billed rate
-          // var empBilled = empMonths * empRate;
-          // console.log(empBilled);
-
-          // // Add each train's data into the table
-          // $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-          // empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
+          // append clients to the table once signed up
+          $("#clients-table > tbody").append("<tr><td>" + userName + "</td><td>" + address + "</td><td>" +
+          email + "</td><td>" + phone + "</td></tr>");
         });
 
         var geocoder;
