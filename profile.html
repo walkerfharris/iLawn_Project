@@ -21,7 +21,7 @@
         <h2 class="text-center">Account Info</h2>
         <hr>
         <div class="row">
-            <div class="col-md-4 col-sm-12 text-center">
+            <div class="col-md-offset-3 col-md-3 col-sm-12 text-center">
                 <img class="img-responsive img-self" src="img/unknown-profile.jpg" alt="Default Profile Pic">
             </div>
             <div class="col-md-6 col-sm-12 left">
@@ -42,25 +42,30 @@
             <h2 class="text-center">Shop & Pay</h2>
             <hr>
             <div class="row text-center">
-              <div class="col-md-offset-2 col-md-2">
+              <div class="col-md-offset-3 col-md-2">
                     <p>Select a Service: </p></div>
-              <div class="col-md-3">
-                  <button class="btn btn-default OneTime">One Time Payment</button>
+              <div class="col-md-2">
+                  <button id="OneTimeBtn" class="btn btn-default OneTime">One Time Payment</button>
               </div>
-              <div class="col-md-3">
-                  <button class="btn btn-default monthly">Monthly Subscribtion</button>
+              <div class="col-md-2">
+                  <button id="monthlyBtn" class="btn btn-default monthly">Monthly Subscribtion</button>
               </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-md-offset-5 col-md-2">
-                    <div id="totalPay">
-                        <p>Order:    $0.00</p>
-                        <p>Discount: $0.00</p>
-                        <p>Tax:      $0.00</p>
-                        <hr>
-                        <p>Total:    $0.00</p>
-                    </div>
+                <div class="col-md-offset-5 col-md-1">
+                    <p>Subtotal:</p>
+                    <p>Discount:</p>
+                    <p>Tax:</p>
+                    <hr>
+                    <p>Total:</p>
+                </div>
+                <div class="col-md-1">
+                    <p id="subtotal">$0.00</p>
+                    <p id="discount">$0.00</p>
+                    <p id="tax">$0.00</p>
+                    <hr class="hiddenLine">
+                    <p id="total">$0.00</p>
                 </div>
             </div>
             <hr>

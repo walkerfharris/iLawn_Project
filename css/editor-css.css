@@ -1,5 +1,6 @@
 body {
     background: url('../img/profile-bg.jpg');
+    background-attachment: fixed;
 }
 
 .container-custom {
@@ -10,14 +11,14 @@ body {
 }
 
 .img-self {
-    width: 40%;
+    width: 50%;
     height: auto;
     border: 3px solid #4aaaa5;
     margin: 20% 15%;
 }
 
 .left {
-    margin-top: 100px;
+    margin-top: 50px;
     color: #000;
 }
 
@@ -32,4 +33,15 @@ hr {
 .submitBtn {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+#map {
+    margin-bottom: 40px;
+    border: 8px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.hiddenLine {
+    opacity:0 ;
 }

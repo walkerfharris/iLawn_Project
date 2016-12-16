@@ -27,6 +27,15 @@ $(document).ready(function() {
             localStorage.setItem('userKey', uid);
             console.log(localStorage.getItem('userKey'));
 
+            if (uid == 'admin123') {
+              if (userPass == '123456') {
+                window.location.href = 'admin.html';
+                return false;
+              } else {
+                $('#error-message').html('<p>*User name or password is incorrect</p>')
+              }
+            }
+
             database.ref('/clients/' + uid).on('value', function(snap) {
               console.log(snap.val());
               dbPass = snap.val().pass;
