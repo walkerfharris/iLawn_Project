@@ -59,4 +59,51 @@ $(document).ready(function() {
           $('#tax').html('$0.82')
           $('#total').html('$10.82')
       })
+
+      // here the weather forcast will be shown - using openweathermap.org api
+      function weatherForcast() {
+        var myCity = 'Houston';
+        var myKey = '5390e1033cebf65be8bffb26609e1dfb'
+        var queryURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + myCity + ',us&mode=json&appid=' + myKey;
+        console.log(queryURL);
+        $.ajax({
+                url: queryURL,
+                method: 'GET',
+        }).done(function(response) {
+          console.log(response);
+          console.log(response.list.length);
+          for (var i = 2; i < response.list.length; i += 8) {
+            var myForecastImg;
+            var myWeaCondition;
+            var date = response.list[i].dt_txt;
+            var weaCond = response.list[i].weather[0].main;
+            console.log(weaCond);
+            console.log(date);
+            var convert = moment(new Date(date));
+            var convertedDate = moment(convert).format("ddd, MMM DD");
+            console.log(convertedDate);
+            var dayForecast = $('<div>');
+            dayForecast.addClass('col-md-3 btn text-center dayForecast');
+            if (weaCond == 'Rain') {
+              myForecastImg = 'img/weather/rainy.png'
+              myWeaCondition = "Rainy"
+            } else if (weaCond == 'Clear') {
+              myForecastImg = 'img/weather/sunny.png'
+              myWeaCondition = "Clear"
+            } else if (weaCond == 'Clouds') {
+              myForecastImg = 'img/weather/pcloudy.png'
+              myWeaCondition = "Cloudy"
+            }
+            var forecastDate = $('<p>').text(convertedDate);
+            var forecastImg = $('<img>').attr('src', myForecastImg);
+            var weaCondition = $('<p>').text(myWeaCondition);
+            // append the weather info to the weather-here
+            dayForecast.prepend(forecastDate);
+            dayForecast.append(forecastImg);
+            dayForecast.append(weaCondition);
+            $('#weather-here').append(dayForecast);
+          }
+        }); // response function ends here
+      } // weatherForcast function ends here
+      weatherForcast();
 });
