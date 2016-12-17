@@ -35,6 +35,8 @@ $(document).ready(function() {
           window.location.href = 'index.html';
           return false;
       })
+
+      // setting a mock payment for demo purposes
       var basePrice = 19.99;
       var firstDisc = 0.50;
       var tax = 0.0825;
@@ -59,8 +61,17 @@ $(document).ready(function() {
           $('#tax').html('$0.82')
           $('#total').html('$10.82')
       })
+      // submit a payment
 
-      // here the weather forcast will be shown - using openweathermap.org api
+      $('.submitBtn').on('click', function() {
+        $('#cardName').empty();
+        $('#cardNumber').empty();
+        $('#cardDate').empty();
+        $('#cardZip').empty();
+        $('#payment-message').html('Thanks for choosing iLawn Services, your payment of $10.82 have been submitted')
+      })
+
+      // here the weather forecast will be shown - using openweathermap.org api
       function weatherForcast() {
         var myCity = 'Houston';
         var myKey = '5390e1033cebf65be8bffb26609e1dfb'

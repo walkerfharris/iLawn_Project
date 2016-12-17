@@ -73,7 +73,11 @@
                 <div id="map"></div>
             </div>
         </div>
+        <div class="col-md-offset-3 col-md-6 text-center">
+            <button id="signOutBtn" class="btn btn-default signOut">Sign out</button>
+        </div>
     </div>
+
     <script>
         var config = {
             apiKey: "AIzaSyCLWRw68W89mSHVL6akIaPNK2qxcqRaWPQ",
@@ -150,7 +154,11 @@
           map = new google.maps.Map(document.getElementById('map'), mapOptions);
         }
 
-        // info popup to appear when a marker clicked with the client/contractor info
+        // signout button
+        $('#signOutBtn').on('click', function() {
+          window.location.href = 'index.html';
+          return false;
+      })
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5MYkrq5YRnEDfQZAPhxuLTS3I9bu1cXs&callback=initMap">
