@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/editor-css.css">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </head>
 <body>
     <div class="page-header header">
@@ -43,7 +44,8 @@
             <hr>
             <div class="row text-center">
               <div class="col-md-offset-3 col-md-2">
-                    <p>Select a Service: </p></div>
+                    <p>Select a Service: </p>
+              </div>
               <div class="col-md-2">
                   <button id="OneTimeBtn" class="btn btn-default OneTime">One Time Payment</button>
               </div>
@@ -70,44 +72,48 @@
             </div>
             <hr>
 
-        <div class="row">
-            <div>
-              <center><h2>Payment</h2></center>
+            <div class="row">
+                <h2 class="text-center">Payment</h2>
             </div>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                      <label>Name on card</label>
+                      <input placeholder="Joe Smith" id="cardName" class="form-control" type="text" maxlength="155">
 
-          </div>
-          <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-              <label or="NameOnCard">Name on card</label>
-              <input placeholder="Joe Smith" id="NameOnCard" class="form-control" type="text" maxlength="155"></input>
+                </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-              <label for="CreditCardNumber">Card number</label>
-              <input placeholder="1111 1111 1111 1111" id="CreditCardNumber" class="null card-image form-control" type="text"></input>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <label>Card number</label>
+                    <input placeholder="1111 1111 1111 1111" id="cardNumber" class="null card-image form-control" type="text">
+                </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-              <label for="ExpiryDate">Expiry date</label>
-              <input placeholder="mm/yy" id="ExpiryDate" class="form-control"></input>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <label>Expiry date</label>
+                    <input placeholder="mm/yy" id="cardDate" class="form-control">
+                </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-              <label for="ZIPCode">ZIP/Postal code</label>
-              <input placeholder="12345" for="ZIPCode" class="form-control"></input>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <label>ZIP/Postal code</label>
+                    <input placeholder="12345" id="cardZip" class="form-control">
+                </div>
             </div>
-            <div>
-              <div class="col-md-offset-3 col-md-6">
-              <center><button class="submitBtn">Submit</button></center>
-              </div>
-              </div>
-          </div>
-      </form>
-  </div>
-</div>
+            <div class="col-md-offset-3 col-md-6 text-center">
+                <button class="submitBtn">Pay Now</button>
+            </div>
+            <div class="row">
+                <div id="payment-message" class="col-md-offset-3 col-md-6 text-center"></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container container-custom">
+            <h2 class="text-center">Weather Forecast</h2>
+            <hr>
+            <div id="weather-here" class="row"></div>
         </div>
     </section>
 
